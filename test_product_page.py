@@ -31,7 +31,6 @@ class TestUserAddToBasketFromProductPage():
         password = str(time.time())
         login_page.register_new_user(email, password)       # зарегистрировать нового пользователя;
         login_page.should_be_authorized_user()              # проверить, что пользователь залогинен
-        # yield                                             # пользователей удалять мы не умеем
 
     # 4.3 step 6
     @pytest.mark.xfail(reason="mistake on page")
@@ -46,12 +45,13 @@ class TestUserAddToBasketFromProductPage():
         page.open()
         page.should_not_be_success_message()    # Проверяем, что НЕТ сообщения об успехе с помощью is_not_element_present
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         page = ProductPage(browser, link)       # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         page.open()                             # Открываем страницу товара
         page.add_to_cart()                      # Нажимаем на кнопку "Добавить в корзину"
         try:
-            page.solve_quiz_and_get_code()  # Посчитать результат математического выражения и ввести ответ
+            page.solve_quiz_and_get_code()      # Посчитать результат математического выражения и ввести ответ
         except NoAlertPresentException:
             print("No alert presented")
         page.should_be_the_product_in_cart()    # Название товара в сообщении совпадает с тем товаром, который добавили?
@@ -70,12 +70,16 @@ class TestGuestAddToBasketFromProductPage():
         page.add_to_cart()                      # Добавляем товар в корзину
         page.should_not_be_success_message()    # Проверяем, что НЕТ сообщения об успехе с помощью is_not_element_present
 
+    @pytest.mark.need_review
     def test_guest_can_add_product_to_basket(self, browser):
         browser.delete_all_cookies()
         page = ProductPage(browser, link)       # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         page.open()                             # Открываем страницу товара
         page.add_to_cart()                      # Нажимаем на кнопку "Добавить в корзину"
-        page.solve_quiz_and_get_code()          # Посчитать результат математического выражения и ввести ответ
+        try:
+            page.solve_quiz_and_get_code()      # Посчитать результат математического выражения и ввести ответ
+        except NoAlertPresentException:
+            print("No alert presented")
         page.should_be_the_product_in_cart()    # Название товара в сообщении совпадает с тем товаром, который добавили?
         page.should_be_correct_cost_in_cart()   # Стоимость корзины совпадает с ценой товара?
 
@@ -110,7 +114,9 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.open()
     page.should_be_login_link()
 
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
+    browser.delete_all_cookies()
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
@@ -118,9 +124,9 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     login_page = LoginPage(browser, browser.current_url)
     login_page.should_be_login_page()
 
-@pytest.mark.new
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
-    # link = "http://selenium1py.pythonanywhere.com/"
+    browser.delete_all_cookies()
     page = ProductPage(browser, link)
     page.open()
     page.go_to_basket_page()                        # Переходим в корзину по кнопке в шапке сайта

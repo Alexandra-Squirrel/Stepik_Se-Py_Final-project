@@ -9,7 +9,6 @@ link_2 = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbo
 
 @pytest.mark.login_guest
 class TestLoginFromMainPage():
-    # login_guest: guest_can_go_to_login_page and guest_should_see_login_link
     def test_guest_can_go_to_login_page(self, browser):
         page = MainPage(browser, link)
         page.open()             # открываем страницу
@@ -25,7 +24,6 @@ class TestLoginFromMainPage():
 
 @pytest.mark.new
 def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
-    # link = "http://selenium1py.pythonanywhere.com/"
     page = MainPage(browser, link)
     page.open()
     page.go_to_basket_page()                        # Переходим в корзину по кнопке в шапке сайта
