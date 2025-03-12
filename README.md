@@ -1,6 +1,6 @@
 # Stepik_Se-Py_Final-project
 Проект представляет собой финальное задание курса "Автоматизация тестирования с помощью Selenium и Python", доступный по ссылке:
-https://stepik.org/course/575/https://github.com/Alexandra-Squirrel/Stepik_Se_Py_Final_project/blob/main/README.md
+https://stepik.org/course/575/
 
 Блок 4 - Применение паттерна Page Object Model
 
