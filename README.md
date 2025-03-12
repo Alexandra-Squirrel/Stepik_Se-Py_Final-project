@@ -1,6 +1,6 @@
 # Stepik_Se-Py_Final-project
 Проект представляет собой финальное задание курса "Автоматизация тестирования с помощью Selenium и Python", доступный по ссылке:
-https://stepik.org/course/575/
+https://stepik.org/course/575/https://github.com/Alexandra-Squirrel/Stepik_Se_Py_Final_project/blob/main/README.md
 
 Блок 4 - Применение паттерна Page Object Model
 
@@ -12,10 +12,6 @@ https://stepik.org/course/575/
    - test_guest_cant_see_product_in_basket_opened_from_product_page
    - test_guest_can_go_to_login_page_from_product_page
 -  **requirements.txt** содержит нужные версии пакетов
-
-Отмаркируйте эти тесты меткой:
-
-@pytest.mark.need_review
 
 ## Запуск
 - рекомендуемая команда для запуска:
