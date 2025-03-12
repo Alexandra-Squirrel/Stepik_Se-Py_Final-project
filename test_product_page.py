@@ -8,15 +8,17 @@ from pages.login_page import LoginPage
 from pages.product_page import ProductPage
 from pages.basket_page import BasketPage
 
-base_link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer'
 link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
 login_link = 'http://selenium1py.pythonanywhere.com/accounts/login/'
+promo_link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0'
 
-# for  @pytest.parametrize
+############### for  @pytest.parametrize
+# base_link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer'
 # x_fail = 7
 # links = [base_link+str(i) for i in range(10) if i != x_fail]
 # xlink = pytest.param(base_link+str(x_fail), marks=pytest.mark.xfail(reason="mistake on page"))
 # links.insert(x_fail, xlink)
+
 f = faker.Faker()
 
 @pytest.mark.add_to_basket
@@ -50,10 +52,7 @@ class TestUserAddToBasketFromProductPage():
         page = ProductPage(browser, link)       # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         page.open()                             # Открываем страницу товара
         page.add_to_cart()                      # Нажимаем на кнопку "Добавить в корзину"
-        try:
-            page.solve_quiz_and_get_code()      # Посчитать результат математического выражения и ввести ответ
-        except NoAlertPresentException:
-            print("No alert presented")
+        page.solve_quiz_and_get_code()          # Посчитать результат математического выражения и ввести ответ
         page.should_be_the_product_in_cart()    # Название товара в сообщении совпадает с тем товаром, который добавили?
         page.should_be_correct_cost_in_cart()   # Стоимость корзины совпадает с ценой товара?
 
@@ -73,13 +72,10 @@ class TestGuestAddToBasketFromProductPage():
     @pytest.mark.need_review
     def test_guest_can_add_product_to_basket(self, browser):
         browser.delete_all_cookies()
-        page = ProductPage(browser, link)       # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        page = ProductPage(browser, promo_link) # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         page.open()                             # Открываем страницу товара
         page.add_to_cart()                      # Нажимаем на кнопку "Добавить в корзину"
-        try:
-            page.solve_quiz_and_get_code()      # Посчитать результат математического выражения и ввести ответ
-        except NoAlertPresentException:
-            print("No alert presented")
+        page.solve_quiz_and_get_code()          # Посчитать результат математического выражения и ввести ответ
         page.should_be_the_product_in_cart()    # Название товара в сообщении совпадает с тем товаром, который добавили?
         page.should_be_correct_cost_in_cart()   # Стоимость корзины совпадает с ценой товара?
 
