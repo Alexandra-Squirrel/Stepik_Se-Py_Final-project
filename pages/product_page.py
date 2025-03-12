@@ -9,14 +9,13 @@ class ProductPage(BasePage):
         add_to_cart_btn.click()
 
     def should_be_the_product_in_cart(self):
-        # 1) Сообщение о том, что товар добавлен в корзину.
-        # Название товара в сообщении должно совпадать с тем товаром, который вы действительно добавили.
+        # Сообщение о том, что товар добавлен в корзину. Название товара в сообщении должно совпадать с товаром, к-й добавили
         product_in_cart = self.find_element_text(*ProductPageLocators.ADDED_TO_CART_TITLE)
         product_in_page = self.find_element_text(*ProductPageLocators.TITLE_OF_PRODUCT)
         assert product_in_page == product_in_cart, "The product in the cart is incorrect"
 
     def should_be_correct_cost_in_cart(self):
-        # 2) Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара.
+        # Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара.
         cost_in_cart = self.find_element_text(*ProductPageLocators.CART_COST_MESSAGE)
         product_price = self.find_element_text(*ProductPageLocators.PRODUCT_PRICE)
         assert product_price == cost_in_cart, "The cost in cart is incorrect"

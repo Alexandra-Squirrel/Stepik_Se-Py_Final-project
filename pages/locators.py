@@ -3,15 +3,25 @@ from selenium.webdriver.common.by import By
 class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    BASKET_BUTTON = (By.CSS_SELECTOR, "span.btn-group > a.btn-default")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
+
+class BasketPageLocators:
+    # товар в корзине
+    BASKET_ITEM = (By.CLASS_NAME, "basket-items")
+    # текст о том, что корзина пуста
+    NO_ITEM_TEXT = (By.CSS_SELECTOR, "#content_inner > p > a")
 
 class MainPageLocators:
-    # LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_2 = (By.CSS_SELECTOR, "#registration_link")
 
 class LoginPageLocators:
-    # LOGIN_URL = (By.CSS_SELECTOR, "#login_link")
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
     REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
+    EMAIL_INPUT = (By.CSS_SELECTOR, "#id_registration-email")
+    PASSWORD_INPUT_1 = (By.CSS_SELECTOR, "#id_registration-password1")
+    PASSWORD_INPUT_2 = (By.CSS_SELECTOR, "#id_registration-password2")
+    REGISTER_BUTTON = (By.CSS_SELECTOR, "#register_form > button")
 
 class ProductPageLocators:
     ADD_TO_CART_BUTTON = (By.CLASS_NAME, "btn-add-to-basket")
